@@ -1,0 +1,15 @@
+/.bashrc
+/.cache
+/.conda
+/.dotnet
+/.ipython
+/.local
+/.nv
+/.profile
+/.ssh
+/.vast_containerlabel
+/.vscode
+/.vscode-server
+/.wget-hsts
+/mpi4py-X.Y.Z.tar.gz
+/onstart.sh
