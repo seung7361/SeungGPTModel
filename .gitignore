@@ -13,3 +13,8 @@
 /.wget-hsts
 /mpi4py-X.Y.Z.tar.gz
 /onstart.sh
+/wandb
+/.config
+/.netrc
+/.wikipedia.bz2
+./view?usp=sharing
