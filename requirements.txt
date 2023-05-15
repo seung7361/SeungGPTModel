@@ -1,0 +1,5 @@
+pip install sentencepiece git+https://github.com/huggingface/transformers wandb datasets accelerate deepspeed
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /root/.profile
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+conda install mpi4py -y
