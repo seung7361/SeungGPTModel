@@ -1,7 +1,8 @@
 import numpy as np
 import torch
 import deepspeed
-import mpu
+
+###
 
 ### parameters from GPT
 
@@ -9,6 +10,27 @@ n_layers = 24
 d_model = 2048
 n_heads = 32
 d_head = 128
+
+### class MPU
+class MPU:
+    def __init__(self, rank: int, world_size: int, device_ids: list, ):
+        self.rank = rank
+        self.world_size = world_size
+        self.device_ids = device_ids
+
+    def get_model_parallel_rank(self):
+        return self.rank
+
+    def get_model_parallel_world_size(self):
+        return self.world_size
+    
+    def get_model_parallel_group(self):
+        return self.device_ids
+
+    def get_data_parallel_group(self):
+        return self.device_ids
+
+mpu = MPU(rank=0, world_size=4, device_ids=[0, 1, 2, 3])
 
 ### hyperparameters
 
@@ -20,7 +42,8 @@ model = torch.nn.TransformerDecoder(decoder_layer=decoder_layer, num_layers=n_la
 loss_fn = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate)
 
-deepspeed.init_distributed()
-print('deepspeed enabled.')
+model_engine, optimizer, _, _ = deepspeed.initialize(model=model, model_parameters=model.parameters(),
+                                                    optimizer=optimizer, config='ds_config.json',
+                                                    mpu=mpu)
 
-model_engine, optimizer, _, _ = deepspeed.initialize(model=model, model_parameters=model.parameters(), mpu=mpu, optimizer=optimizer)
+a = torch.randn()

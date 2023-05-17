@@ -10,5 +10,22 @@
     "fp16": {
       "enabled": true
     },
-    "zero_optimization": true
+    "session_params": {
+      "zero_optimization": {
+        "stage": 2,
+        "stage3_max_live_parameters" : 1000000000,
+        "stage3_max_reuse_distance" : 1000000000,
+        "allgather_partitions": false,
+        "allgather_bucket_size": 500000000,
+        "reduce_scatter": false,
+        "contiguous_gradients" : false,
+        "overlap_comm": false,
+        "reduce_bucket_size": 500000000,
+        "load_from_fp32_weights": false,
+        "sub_group_size" : 1000000000000,
+        "ignore_unused_parameters": false,
+        "round_robin_gradients": false,
+        "memory_efficient_linear": false
+        }
+    }
 }
