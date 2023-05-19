@@ -1,6 +1,12 @@
 import numpy as np
 import torch
 
+a = torch.randint(low=0, high=25000, size=(8, 256))
+print(a.shape)
+b = a[:, :-1]
+emb = torch.nn.Embedding(25000, 2048)
+emb(b)
+
 ### parameters from GPT
 
 n_layers = 24
